@@ -136,7 +136,7 @@ fun ContentSettings(
         )
 
         PreferenceGroupTitle(
-            title = "PROXY"
+            title = stringResource(R.string.proxy_group_title)
         )
 
         SwitchPreference(

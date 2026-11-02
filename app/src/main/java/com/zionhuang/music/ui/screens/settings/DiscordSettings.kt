@@ -237,7 +237,7 @@ fun RichPresence(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Listening to InnerTune",
+                text = stringResource(R.string.discord_listening_to),
                 style = MaterialTheme.typography.labelLarge,
                 textAlign = TextAlign.Start,
                 fontWeight = FontWeight.ExtraBold,
@@ -290,7 +290,7 @@ fun RichPresence(
                         .padding(horizontal = 6.dp)
                 ) {
                     Text(
-                        text = song?.song?.title ?: "Song Title",
+                        text = song?.song?.title ?: stringResource(R.string.song_title),
                         color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.ExtraBold,
@@ -299,7 +299,7 @@ fun RichPresence(
                     )
 
                     Text(
-                        text = song?.artists?.joinToString { it.name } ?: "Artist",
+                        text = song?.artists?.joinToString { it.name } ?: stringResource(R.string.artist_name),
                         color = MaterialTheme.colorScheme.secondary,
                         fontSize = 16.sp,
                         maxLines = 1,
@@ -328,7 +328,7 @@ fun RichPresence(
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Listen on YouTube Music")
+                Text(stringResource(R.string.listen_on_youtube_music))
             }
 
             OutlinedButton(
@@ -338,7 +338,7 @@ fun RichPresence(
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Visit InnerTune")
+                Text(stringResource(R.string.visit_innertune))
             }
         }
     }

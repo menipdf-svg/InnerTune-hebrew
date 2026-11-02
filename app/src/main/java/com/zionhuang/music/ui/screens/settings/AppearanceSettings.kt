@@ -1,5 +1,10 @@
 package com.zionhuang.music.ui.screens.settings
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -36,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -75,6 +81,8 @@ fun AppearanceSettings(
     val (sliderStyle, onSliderStyleChange) = rememberEnumPreference(SliderStyleKey, defaultValue = SliderStyle.DEFAULT)
     val (defaultOpenTab, onDefaultOpenTabChange) = rememberEnumPreference(DefaultOpenTabKey, defaultValue = NavigationTab.HOME)
     val (gridCellSize, onGridCellSizeChange) = rememberEnumPreference(GridCellSizeKey, defaultValue = GridCellSize.SMALL)
+
+    val context = LocalContext.current
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val useDarkTheme = remember(darkMode, isSystemInDarkTheme) {
@@ -256,6 +264,24 @@ fun AppearanceSettings(
         PreferenceGroupTitle(
             title = stringResource(R.string.misc)
         )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            PreferenceEntry(
+                title = { Text(stringResource(R.string.app_language)) },
+                icon = { Icon(painterResource(R.drawable.language), null) },
+                onClick = {
+                    try {
+                        context.startActivity(
+                            Intent(
+                                Settings.ACTION_APP_LOCALE_SETTINGS,
+                                Uri.fromParts("package", context.packageName, null)
+                            )
+                        )
+                    } catch (_: ActivityNotFoundException) {
+                    }
+                }
+            )
+        }
 
         EnumListPreference(
             title = { Text(stringResource(R.string.default_open_tab)) },

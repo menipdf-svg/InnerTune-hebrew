@@ -336,4 +336,5 @@
     <string name="listen_on_youtube_music">Listen on YouTube Music</string>
     <string name="visit_innertune">Visit InnerTune</string>
     <string name="proxy_group_title">PROXY</string>
+    <string name="app_language">App language</string>
 </resources>
